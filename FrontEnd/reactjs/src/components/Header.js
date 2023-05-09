@@ -9,6 +9,8 @@ import Cookies from 'js-cookie'
 const Header = (props) => {
 
     const navigate = useNavigate();
+    const page = window.location.href.split('/').pop()
+
     useEffect(() => {
         if(UserDetails.user == null){
             console.log(Cookies.get('userName'))
@@ -20,7 +22,6 @@ const Header = (props) => {
             }).then(res => res.json())
             .then(res => {
                 console.log(res)
-                const page = window.location.href.split('/').pop()
                 if(res.userDetails){
                     UserDetails.user = res.userDetails
                     console.log(UserDetails.user)
@@ -38,7 +39,9 @@ const Header = (props) => {
     return (
         <header className="App-header">
             {props.children}
-            <Link to='/logout' className='end-session'>Logout</Link>
+            {page && page != 'login' && 
+                <Link to='/logout' className='end-session'>Logout</Link>
+            }
         </header>
     )
 }
