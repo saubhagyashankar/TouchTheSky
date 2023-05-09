@@ -1,0 +1,31 @@
+.login-section {
+    display: flex;
+    justify-content: center;
+}
+
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.input-field input {
+    padding: 0.8rem;
+}
+
+.login-form .input-field {
+    margin-bottom: 1.0 rem
+}
+
+.login-button {
+    background: linear-gradient(to left, #4776E6, #8e54e9);
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    padding: 0.4rem;
+}
