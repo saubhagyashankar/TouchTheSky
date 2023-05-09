@@ -1,3 +1,3 @@
 export class UserDetails {
-    static user;
+    static user = null;
 }

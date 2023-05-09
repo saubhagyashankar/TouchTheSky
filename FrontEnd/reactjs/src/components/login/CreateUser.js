@@ -43,7 +43,7 @@ const CreateUser = () => {
     return (
         <div>
             <header className='App-header'>
-                <Link to='/home' className='back-btn'>Back</Link>
+                <Link to='/home' className='back-btn'>Back⬅</Link>
                 Create User
             </header>
 

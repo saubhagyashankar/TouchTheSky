@@ -4,6 +4,7 @@ const sessions = require('express-session');
 const cors = require('cors');
 
 const user = require('./components/user/index');
+const ai = require('./components/openai')
 
 const app = express();
 const port = 8001;
@@ -40,6 +41,7 @@ app.use(express.urlencoded({extended: false}));
 
 //user api calls
 app.use("/user", user)
+app.use("/ai", ai)
 
 app.get('/', (req, res) => {
     res.send("Live! Working")

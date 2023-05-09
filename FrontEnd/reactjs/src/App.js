@@ -4,6 +4,7 @@ import Login from './components/login/Login'
 import Home from './components/home/Home'
 import CreateUser from './components/login/CreateUser'
 import Logout from './components/login/Logout'
+import GeneratePetNames from './components/generatepetnames/GeneratePetNames';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route  path='/home' element={<Home></Home>}></Route>
           <Route  path='/create-user' element={<CreateUser></CreateUser>}></Route>
           <Route  path='/logout' element={<Logout></Logout>}></Route>
+          <Route  path='/generate-pet-names' element={<GeneratePetNames></GeneratePetNames>}></Route>
         
         </Routes>
       

@@ -2,13 +2,17 @@ import React, { useEffect } from "react";
 import { UserDetails } from "./static/UserDetails";
 import { BACKEND_URL } from "./static/Constants";
 import {Link, useNavigate} from 'react-router-dom';
+import Cookies from 'js-cookie'
+
 
 
 const Header = (props) => {
 
     const navigate = useNavigate();
     useEffect(() => {
-        if(!UserDetails.user?.userName){
+        if(UserDetails.user == null){
+            console.log(Cookies.get('userName'))
+            console.log(window.location.href)
             const URL = BACKEND_URL + '/user/';
             fetch(URL, {
                 method: 'GET',
@@ -16,12 +20,16 @@ const Header = (props) => {
             }).then(res => res.json())
             .then(res => {
                 console.log(res)
+                const page = window.location.href.split('/').pop()
                 if(res.userDetails){
                     UserDetails.user = res.UserDetails
-                    navigate('/home')
+                    if(page == 'logot')
+                        navigate('/home')
                 }
-                else
-                    navigate('/')
+                else{
+                    if(page != 'logout')
+                        navigate('/')
+                }
             })
         }
     }, [])
