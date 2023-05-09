@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { BACKEND_URL } from '../static/Constants'
 import { useNavigate } from 'react-router-dom'
+import { UserDetails } from '../static/UserDetails'
 import Cookies from 'js-cookie'
 
 
@@ -12,7 +13,8 @@ const Logout = () => {
         fetch(URL).then(res => res.json())
         .then(res => {
             Cookies.remove('userName');
-            Cookies.remove('connect.sid')
+            Cookies.remove('connect.sid');
+            UserDetails.user = null;
             navigate('/')
         })
     }, [])

@@ -9,6 +9,7 @@ const Home = () => {
     const navigate = useNavigate()
     useEffect(() => {
         setTimeout(() => {
+            // console.log(UserDetails.user.userName)
             setUserName(UserDetails?.user?.userName)
         }, 100);
     }, [])
@@ -17,7 +18,7 @@ const Home = () => {
             <Header>
                 HomePage
             </Header>
-            <h4>Hello {userName}</h4>
+            <h4>Hello {userName && (userName[0].toUpperCase() + userName.slice(1))}</h4>
             <button onClick={e => navigate('/generate-pet-names')}>Pet Names Generator</button>
             </div>
     )

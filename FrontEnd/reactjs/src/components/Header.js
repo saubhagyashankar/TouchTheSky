@@ -22,7 +22,8 @@ const Header = (props) => {
                 console.log(res)
                 const page = window.location.href.split('/').pop()
                 if(res.userDetails){
-                    UserDetails.user = res.UserDetails
+                    UserDetails.user = res.userDetails
+                    console.log(UserDetails.user)
                     if(page == 'logot')
                         navigate('/home')
                 }
