@@ -32,3 +32,8 @@ yarn-error.log*
 
 #tmp files
 .tmp
+
+
+#folders
+RND
+/RND
