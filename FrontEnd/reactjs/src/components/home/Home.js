@@ -3,7 +3,7 @@ import { UserDetails } from '../static/UserDetails';
 import Header from '../Header'
 import { useNavigate } from 'react-router-dom';
 import SpeechRecognition from '../speechrecognition/SpeechRecognition';
-
+import SimplePythonScript from '../pythonscripts/SimplePythonScript'
 
 const Home = () => {
     const [userName, setUserName] = useState('')
@@ -23,6 +23,7 @@ const Home = () => {
             <button onClick={e => navigate('/generate-pet-names')}>Pet Names Generator</button>
 
             <SpeechRecognition></SpeechRecognition>
+            <SimplePythonScript></SimplePythonScript>
             </div>
     )
 }

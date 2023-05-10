@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const user = require('./components/user/index');
 const ai = require('./components/openai')
+const pythonScripts = require('./components/pythonscripts')
 
 const app = express();
 const port = 8001;
@@ -42,6 +43,7 @@ app.use(express.urlencoded({extended: false}));
 //user api calls
 app.use("/user", user)
 app.use("/ai", ai)
+app.use("/pythonScripts", pythonScripts)
 
 app.get('/', (req, res) => {
     res.send("Live! Working")
