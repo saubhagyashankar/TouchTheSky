@@ -11,7 +11,7 @@ const Home = () => {
         setTimeout(() => {
             // console.log(UserDetails.user.userName)
             setUserName(UserDetails?.user?.userName)
-        }, 100);
+        }, 1000);
     }, [])
     return (
         <div>

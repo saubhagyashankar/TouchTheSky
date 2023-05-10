@@ -1,7 +1,1 @@
-[
-    {
-        "userName": "saubhagya",
-        "password": "$2a$10$V38s1QWIqmKBSM7qLEKqk.I0GS/gv4QnLAdeH8x.blywwcDIbo3OS",
-        "email": "saubhagyashankar48@gmail.com"
-    }
-]
+[{"userName":"saubhagya","password":"$2a$10$V38s1QWIqmKBSM7qLEKqk.I0GS/gv4QnLAdeH8x.blywwcDIbo3OS","email":"saubhagyashankar48@gmail.com"},{"userName":"shankar","password":"$2a$10$QVOt9YJCfGbyiOlEnNWDKuMutWdGF1WtNEP6oaGjH3QQpE.EKqJ8e","email":"shankar@gmail.com"}]
