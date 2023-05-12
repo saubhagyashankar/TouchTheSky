@@ -2,8 +2,15 @@ const fs = require('fs');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const userController = express()
-const Users = require('../../models/user');
+const Users = require('../../models/Users');
+const multer = require('multer');
+const XLSX = require('xlsx');
 
+
+const uploadsFolder = __dirname + '/../files/'
+
+const upload = multer({dest: uploadsFolder});
+const GeneralData = require('../../models/GeneralData');
 
 const USER_FILE_PATH = __dirname + '/../files/users.json';
 
@@ -77,6 +84,25 @@ userController.post('/', async(req, res) => {
 
 
 
+})
+
+
+userController.post('/togeneraldata', upload.single('file'), (req, res) => {
+    // Read the Excel file and convert the data to JSON
+  const workbook = XLSX.readFile(req.file.path);
+  const sheet_name_list = workbook.SheetNames;
+  const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+
+  // Iterate over the data and save each row to the database
+  data.forEach((row) => {
+    let item = new GeneralData(row);
+    item.save((err) => {
+      if (err) return console.error(err);
+      console.log('Row saved to the database!');
+    });
+  });
+
+  res.send('File uploaded and data saved to the database!');
 })
 
 module.exports = userController

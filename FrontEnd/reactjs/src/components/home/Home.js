@@ -14,7 +14,7 @@ const Home = () => {
     const navigate = useNavigate()
     useEffect(() => {
         setTimeout(() => {
-            // console.log(UserDetails.user.userName)
+            console.log(UserDetails.user)
             setUserName(UserDetails?.user?.userName)
             setUserRole(UserDetails?.user?.role)
         }, 1000);
@@ -36,8 +36,11 @@ const Home = () => {
             <RecycleFacilityHomePage></RecycleFacilityHomePage>
         )
     else
-    return (
+        return (
         <div>
+            <Header>
+                Home
+            </Header>
             Loading ....
             {/* <Header>
                 Loading...

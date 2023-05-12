@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../Header'
+import FileUpload from '../fileupload/FileUpload'
 
 function AirlineHomePage() {
   return (
@@ -7,6 +8,8 @@ function AirlineHomePage() {
         <Header>
             AirlineHomePage
         </Header>
+
+        <FileUpload></FileUpload>
         
         </div>
   )
