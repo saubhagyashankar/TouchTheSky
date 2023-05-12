@@ -116,4 +116,19 @@ userController.get('/getAllGeneralData', async(req, res) => {
     }   
 })
 
+userController.get('/getUserDashBoardData', async(req, res) => {
+    try{
+        userName = req.query.userName
+        role = req.query.role
+
+        const user = await Users.find({userName: userName, role: role})
+        if (user){
+            const data = await GeneralData.find({owner: userName, successFailure: null, del: false, auctionRemanufacturing: null, auctionRecycling: null})
+            res.status(200).send({data: data, count: data.length})
+        }
+    }catch(err){
+        res.status(400).send(err)
+    }
+})
+
 module.exports = userController

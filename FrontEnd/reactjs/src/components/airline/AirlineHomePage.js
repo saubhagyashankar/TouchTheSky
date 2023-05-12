@@ -3,6 +3,7 @@ import Header from '../Header'
 import FileUpload from '../fileupload/FileUpload'
 import { BACKEND_URL } from '../static/Constants'
 import GeneralData from '../../components/generaldata/GeneralData'
+import Dashboard from '../dashboards/Dashboard'
 
 function AirlineHomePage() {
     const [data, setData] = useState(null)
@@ -16,6 +17,8 @@ function AirlineHomePage() {
         <Header>
             AirlineHomePage
         </Header>
+
+        <Dashboard></Dashboard>
 
         <FileUpload></FileUpload>
         <button onClick={getAllGeneralData}>Fetch data</button>

@@ -6,7 +6,6 @@ import {
     MDBCardText,
     MDBCardHeader,
     MDBCardFooter,
-    MDBBtn
   } from 'mdb-react-ui-kit';
 import { BACKEND_URL } from '../static/Constants';
 
@@ -23,7 +22,7 @@ const GeneralData = () => {
   return (
     <div>
         {data && data.map((part, index) => (
-             <MDBCard alignment='center'>
+             <MDBCard key={index} alignment='center'>
              <MDBCardHeader>{part.age}</MDBCardHeader>
              <MDBCardBody>
                <MDBCardTitle>{part.partName}</MDBCardTitle>
