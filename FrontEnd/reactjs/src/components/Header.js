@@ -6,13 +6,12 @@ import Cookies from 'js-cookie'
 
 
 
-const Header = (props) => {
+const Header = ({children}) => {
 
     const navigate = useNavigate();
     const page = window.location.href.split('/').pop()
-
     useEffect(() => {
-        console.log(UserDetails.user);
+        console.log(UserDetails.user, 'page', page);
         if (UserDetails.user == null) {
             console.log(Cookies.get('userName'))
             console.log(window.location.href)
@@ -26,11 +25,11 @@ const Header = (props) => {
                     if (res.userDetails) {
                         UserDetails.user = res.userDetails
                         console.log(UserDetails.user)
-                        if (page == 'logout')
+                        if (page == '')
                             navigate('/home')
                     }
                     else {
-                        if (page != 'logout')
+                        if (page != '')
                             navigate('/')
                     }
                 })
@@ -39,7 +38,7 @@ const Header = (props) => {
 
     return (
         <header className="App-header">
-            {props.children}
+            {children}
             {page && page != 'login' &&
                 <Link to='/logout' className='end-session'>Logout</Link>
             }

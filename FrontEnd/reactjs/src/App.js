@@ -5,8 +5,8 @@ import Home from './components/home/Home'
 import CreateUser from './components/login/CreateUser'
 import Logout from './components/login/Logout'
 import GeneratePetNames from './components/generatepetnames/GeneratePetNames';
-import ChartRecycle from './components/dashboards/ChartRecycle';
 import Dashboard from './components/dashboards/Dashboard';
+import SpecificPart from './components/generaldata/SpecificPart';
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route  path='/logout' element={<Logout></Logout>}></Route>
           <Route  path='/generate-pet-names' element={<GeneratePetNames></GeneratePetNames>}></Route>
           <Route  path='/dashboard' element={<Dashboard></Dashboard>}></Route>
+          <Route  path='/specific-page' element={<SpecificPart></SpecificPart>}></Route>
         </Routes>
       
       </Router>

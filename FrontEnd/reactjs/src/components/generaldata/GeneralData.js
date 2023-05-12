@@ -8,10 +8,12 @@ import {
     MDBCardFooter,
   } from 'mdb-react-ui-kit';
 import { BACKEND_URL } from '../static/Constants';
+import { useNavigate } from 'react-router-dom';
 
 const GeneralData = () => {
 
     const [data, setData] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() =>{
         //fetch all general data
@@ -19,10 +21,19 @@ const GeneralData = () => {
         fetch(URL).then(res => res.json()).then(res => setData(res.data))
     }, [])
 
+    const openSpecificPart = (part) => {
+        navigate('/specific-part', {state: {part: part}})
+    }
+    
+
   return (
     <div>
+        <div  style={{width: '100%', height: '100%', flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',justifyContent: "space-between", display: 'flex'}}>
+
         {data && data.map((part, index) => (
-             <MDBCard key={index} alignment='center'>
+            <MDBCard onClick={() => openSpecificPart(part)} style={{height: '200px', width: '300px', marginTop: '3px',}} key={index} alignment='center'>
              <MDBCardHeader>{part.age}</MDBCardHeader>
              <MDBCardBody>
                <MDBCardTitle>{part.partName}</MDBCardTitle>
@@ -31,6 +42,7 @@ const GeneralData = () => {
              <MDBCardFooter className='text-muted'>{part.condition}</MDBCardFooter>
            </MDBCard>
         ))}
+        </div>
     </div>
   )
 }
