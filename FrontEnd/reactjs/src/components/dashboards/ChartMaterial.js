@@ -1,129 +1,75 @@
-import { useEffect } from "react";
-import * as am5 from "@amcharts/amcharts5";
-import * as am5percent from "@amcharts/amcharts5/percent";
-import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
-function ChartMaterial() {
-  useEffect(() => {
-    am5.ready(function () {
-      // Create root element
-      var root = am5.Root.new("chartdiv");
+import React, { useEffect, useState } from 'react';
+import * as am4core from '@amcharts/amcharts4/core';
+import * as am4charts from '@amcharts/amcharts4/charts';
+import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+import { BACKEND_URL } from '../static/Constants';
+import { UserDetails } from '../static/UserDetails';
 
-      // Set themes
-      root.setThemes([am5themes_Animated.new(root)]);
+am4core.useTheme(am4themes_animated);
 
-      // Create chart
-      var chart = root.container.children.push(
-        am5percent.PieChart.new(root, {
-          startAngle: 160,
-          endAngle: 380,
-        })
-      );
-
-      // Create series
-      var series0 = chart.series.push(
-        am5percent.PieSeries.new(root, {
-          valueField: "litres",
-          categoryField: "country",
-          startAngle: 160,
-          endAngle: 380,
-          radius: am5.percent(70),
-          innerRadius: am5.percent(65),
-        })
-      );
-
-      var colorSet = am5.ColorSet.new(root, {
-        colors: [series0.get("colors").getIndex(0)],
-        passOptions: {
-          lightness: -0.05,
-          hue: 0,
-        },
-      });
-
-      series0.set("colors", colorSet);
-
-      series0.ticks.template.set("forceHidden", true);
-      series0.labels.template.set("forceHidden", true);
-
-      var series1 = chart.series.push(
-        am5percent.PieSeries.new(root, {
-          startAngle: 160,
-          endAngle: 380,
-          valueField: "bottles",
-          innerRadius: am5.percent(80),
-          categoryField: "country",
-        })
-      );
-
-      series1.ticks.template.set("forceHidden", true);
-      series1.labels.template.set("forceHidden", true);
-
-      var label = chart.seriesContainer.children.push(
-        am5.Label.new(root, {
-          textAlign: "center",
-          centerY: am5.p100,
-          centerX: am5.p50,
-          text: "[fontSize:18px]total[/]:\n[bold fontSize:30px]1647.9[/]",
-        })
-      );
-
-      var data = [
-        {
-          country: "Lithuania",
-          litres: 501.9,
-          bottles: 1500,
-        },
-        {
-          country: "Czech Republic",
-          litres: 301.9,
-          bottles: 990,
-        },
-        {
-          country: "Ireland",
-          litres: 201.1,
-          bottles: 785,
-        },
-        {
-          country: "Germany",
-          litres: 165.8,
-          bottles: 255,
-        },
-        {
-          country: "Australia",
-          litres: 139.9,
-          bottles: 452,
-        },
-        {
-          country: "Austria",
-          litres: 128.3,
-          bottles: 332,
-        },
-        {
-          country: "UK",
-          litres: 99,
-          bottles: 150,
-        },
-        {
-          country: "Belgium",
-          litres: 60,
-          bottles: 178,
-        },
-        {
-          country: "The Netherlands",
-          litres: 50,
-          bottles: 50,
-        },
-      ];
-
-      // Set data
-      series0.data.setAll(data);
-      series1.data.setAll(data);
-    });
-  }, []);
+//
+const ChartMaterial = ({data}) => {
+  let frequencyMap = {};
+console.log(data);
+const myMap = new Map();
+let Material = []
 
 
-    return <div id="chartdiv" style={{ width: '100%', height: '500px' }} />;
-
+for (let i = 0; i < data.length; i++) {
+  let str = data[i].materialComposition;
+  if (frequencyMap[str]) {
+    frequencyMap[str]++;
+    myMap.set(str, { category: str, value: (frequencyMap[str]/data.length)*100});
+  } else {
+    frequencyMap[str] = 1;
+    myMap.set(str, { category: str, value: (frequencyMap[str]/data.length)*100});
+  }
 }
+for (const [key, value] of myMap) {
+  Material.push(value);
+}
+console.log(Material);
+  
+  const recycledSuccessPie = () => {
+     // Create pie chart instance
+     
+     const pieChart = am4core.create('chartdiv', am4charts.PieChart);
+     pieChart.data = Material;
+     const pieSeries = pieChart.series.push(new am4charts.PieSeries());
+     pieSeries.dataFields.value = 'value';
+     pieSeries.dataFields.category = 'category';
+     pieSeries.labels.template.text = '{category}';
+     pieSeries.labels.template.radius = am4core.percent(-40);
+     pieSeries.labels.template.fill = am4core.color('#000000');
+     pieSeries.labels.template.disabled = true;
+     pieSeries.innerRadius = am4core.percent(50);
+     pieChart.legend = new am4charts.Legend();
+     pieChart.exporting.menu = new am4core.ExportMenu();
+     pieChart.exporting.filePrefix = 'chartdiv-export';
+     pieChart.exporting.useWebFonts = false;
+ 
+     // Create bar chart instance
+     
+     // Clean up on unmount
+     return () => {
+       pieChart.dispose();
+     };
+  }
+
+  useEffect(() => {
+    //add all the chart elements here
+    recycledSuccessPie();
+  }, [data])
+
+
+  
+
+  return (
+    <div style={{ display: 'flex' }}>
+      <div id="chartdiv" style={{ width: '50%', height: '500px' }}></div>
+    </div>
+  );
+};
 
 export default ChartMaterial;

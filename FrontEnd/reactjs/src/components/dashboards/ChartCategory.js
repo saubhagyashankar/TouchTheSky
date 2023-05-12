@@ -1,9 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
+
+
 const ChartCategory = ({ data }) => {
+ 
+  let carbon=0,water=0,landfill=0,len=data.length;
+  for(let i = 0; i < data.length ; i++)
+  {
+     carbon+= ((data[i].newPartsCarbonFootprint - data[i].recycledPartsCarbonFootprint)/data[i].newPartsCarbonFootprint)*100;
+     water+=  ((data[i].waterUsageNewParts   - data[i].waterUsageRecycledParts)/data[i].waterUsageNewParts)*100;
+     landfill+=((data[i].landfillWasteNewParts - data[i].landfillWasteRecycledParts)/data[i].landfillWasteNewParts)*100;
+  }
+  console.log(carbon,water,landfill,len);
+  let chartData = 
+  [
+     {
+       category: "Category A",
+       co2Reduction: carbon/len,
+       waterReduction: water/len,
+       landfillReduction: landfill/len,
+     }
+   ];
   useEffect(() => {
     // Themes begin
     am4core.useTheme(am4themes_animated);
@@ -13,7 +33,7 @@ const ChartCategory = ({ data }) => {
     const chart = am4core.create("zzz", am4charts.XYChart);
 
     // Add data
-    chart.data = data;
+    chart.data = chartData;
 
     // Create axes
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -51,9 +71,22 @@ const ChartCategory = ({ data }) => {
 
     // Add cursor
     chart.cursor = new am4charts.XYCursor();
-  }, [data]);
 
-  return <div id="zzz" style={{ width: "100%", height: "500px" }}></div>;
+    // Clean up on unmount
+    return () => {
+      chart.dispose();
+    };
+  }, [chartData]);
+
+
+  
+
+  return (
+    <>
+      {/* <button onClick={updateData}>Update Data</button> */}
+      <div id="zzz" style={{ width: "100%", height: "500px" }}></div>
+    </>
+  );
 };
 
-export default ChartCategory;
+export default ChartCategory;

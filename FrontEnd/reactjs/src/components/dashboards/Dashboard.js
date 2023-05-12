@@ -4,6 +4,11 @@ import { BACKEND_URL } from '../static/Constants';
 import { UserDetails } from '../static/UserDetails';
 import MenuContainer from '../menu/MenuContainer';
 import Header from '../Header';
+import ChartCategory from './ChartCategory';
+import ChartMaterial from './ChartMaterial';
+import ChartPieMaterial from './ChartPieMaterial';
+
+
 
 
 const Dashboard = () => {
@@ -29,6 +34,15 @@ const Dashboard = () => {
             {/* All the graphs go here */}
             {data && 
             <ChartRecycle data={data}></ChartRecycle>
+            }
+            {data &&
+              <ChartMaterial data={data}></ChartMaterial>
+            }
+            { data &&
+              <ChartPieMaterial data={data}></ChartPieMaterial>
+            }
+            {data && 
+              <ChartCategory data ={data}></ChartCategory>
             }
         </div>
     )

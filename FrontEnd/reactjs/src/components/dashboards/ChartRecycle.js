@@ -10,13 +10,20 @@ am4core.useTheme(am4themes_animated);
 //
 const ChartRecycle = ({data}) => {
   
-  console.log(data.length);
+  let count = 0;
+  for (let i = 0; i < data.length; i++) {
+   if(!data[i].successFailure)
+   count++;
+  }
+  let Recycle_S = data.length - count;
+  let Recycle_F = count;
+  
   const recycledSuccessPie = () => {
      // Create pie chart instance
      const pieChart = am4core.create('pie-chart', am4charts.PieChart);
      pieChart.data = [
-       { category: 'Recycle Successful', value: 10 },
-       { category: 'Recycle Failed', value: 20 }
+       { category: 'Recycle Successful', value: Recycle_S },
+       { category: 'Recycle Failed', value: Recycle_F }
      ];
      const pieSeries = pieChart.series.push(new am4charts.PieSeries());
      pieSeries.dataFields.value = 'value';
