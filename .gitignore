@@ -32,7 +32,7 @@ yarn-error.log*
 
 #tmp files
 .tmp
-
+package-lock.json
 
 #folders
 RND
