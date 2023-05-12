@@ -123,7 +123,7 @@ userController.get('/getUserDashBoardData', async(req, res) => {
 
         const user = await Users.find({userName: userName, role: role})
         if (user){
-            const data = await GeneralData.find({owner: userName, successFailure: null, del: false, auctionRemanufacturing: null, auctionRecycling: null})
+            const data = await GeneralData.find({owner: userName, successFailure: {$ne: null}, del: false, auctionRemanufacturing: null, auctionRecycling: null})
             res.status(200).send({data: data, count: data.length})
         }
     }catch(err){
