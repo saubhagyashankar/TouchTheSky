@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const sessions = require('express-session');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 const user = require('./components/user/index');
 const ai = require('./components/openai')
@@ -48,6 +49,16 @@ app.use("/pythonScripts", pythonScripts)
 app.get('/', (req, res) => {
     res.send("Live! Working")
 })
+
+const uri = process.env.ATLAS_URI;
+
+mongoose.connect(uri, {useNewUrlParser: true});
+
+const connection = mongoose.connection;
+connection.once('open', () => {
+    console.log('connection with db established');
+});
+
 
 app.listen(port, () => {
     console.log(`Backend is live on port ${port}`);

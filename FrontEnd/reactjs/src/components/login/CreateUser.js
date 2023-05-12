@@ -8,7 +8,8 @@ const CreateUser = () => {
     const [userData, setUserData] = useState({
         userName: '',
         password:'',
-        email:''
+        email:'',
+        role:''
     })
 
     const handleOnChange = (e) => {
@@ -52,13 +53,17 @@ const CreateUser = () => {
                 <input type='text' onChange={e => handleOnChange(e)}
                  name='userName'></input>
                 <br></br>
+                <label>password</label>
+                <input type='password' onChange={e => handleOnChange(e)}
+                 name='password'></input>
+                <br></br>
                 <label>Email</label>
                 <input type='text' onChange={e => handleOnChange(e)}
                  name='email'></input>
                 <br></br>
-                <label>password</label>
-                <input type='password' onChange={e => handleOnChange(e)}
-                 name='password'></input>
+                <label>Role</label>
+                <input type='text' onChange={e => handleOnChange(e)}
+                  name='role' maxLength={1}></input>
                 <br></br>
                 <button onClick={handleCreateUser}>Submit</button>
             </section>

@@ -1,17 +1,24 @@
 const fs = require('fs');
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { isFloat64Array } = require('util/types');
 const userController = express()
+const Users = require('../../models/user');
 
 
 const USER_FILE_PATH = __dirname + '/../files/users.json';
 
-const users = require(USER_FILE_PATH);
+const getUsers = async(userName) => {
+    
+    const user = await Users.find({userName: userName}).then(users =>   users);
+    console.log(user)
+    return user;
 
-userController.get('/', (req, res) => {
+}   
+
+userController.get('/', async(req, res) => {
     if(req.cookies['userName']){
         let userName = req.cookies['userName'];
+        let users = await getUsers(userName);
         users.map(user => {
             if(user.userName == userName){
                 res.send({success: true, userDetails: user});
@@ -21,7 +28,9 @@ userController.get('/', (req, res) => {
         const userName = req.query.userName;
         const password = req.query.password;
         let userFound = false;
+        let users = await getUsers(userName);
         users.map(user => {
+            console.log(user);
             if(user.userName == userName) {
                 userFound = true;
                 if(bcrypt.compareSync(password, user.password)){
@@ -47,13 +56,27 @@ userController.get('/logout', (req, res) => {
 })
 
 
-userController.post('/', (req, res) => {
-    newUserData = req.body;
-    users.push(newUserData)
-    fs.writeFile(USER_FILE_PATH, JSON.stringify(users), err => {
-        if(err) res.status(400).send({err})
-        res.send({message: 'New User Created successfully'})
-    })
+userController.post('/', async(req, res) => {
+    // newUserData = req.body;
+    
+    // users.push(newUserData)
+    // fs.writeFile(USER_FILE_PATH, JSON.stringify(users), err => {
+    //     if(err) res.status(400).send({err})
+    //     res.send({message: 'New User Created successfully'})
+    // })
+
+    //using mongodb
+    try{
+
+        let newUser = new Users(req.body);
+        const result = await newUser.save();
+        res.send({message: "User created successfully"})
+    }catch(err) {
+        res.status(400).send(err);
+    }
+
+
+
 })
 
 module.exports = userController

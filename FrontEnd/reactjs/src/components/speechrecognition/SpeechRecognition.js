@@ -11,20 +11,25 @@ recognition.lang = "en-US";
 const SpeechRecognition = () => {
     const [transcript, setTranscript] = useState("");
     const [isRecording, setIsRecording] = useState(false);
+    const [counter, setCounter] = useState(0)
 
     recognition.onresult = (event) => {
+        setCounter(prev => prev + 1);
         let interimTranscript = "";
         let finalTranscript = "";
+        let allInterimTranscripts = "";
         for (let i = event.resultIndex; i < event.results.length; i++) {
             const transcript = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
                 finalTranscript += transcript + " ";
+                // setTranscript((prev) => prev + ' ' + finalTranscript);
             } else {
                 interimTranscript += transcript;
-                setTranscript(interimTranscript)
+                // allInterimTranscripts += interimTranscript;
+                // setTranscript(prev => prev + ' ' + interimTranscript)
             }
         }
-        // setTranscript(finalTranscript);
+        setTranscript((prev) => prev + ' ' + finalTranscript);
     };
 
     recognition.onerror = (event) => {
@@ -32,6 +37,7 @@ const SpeechRecognition = () => {
     };
 
     const startRecognition = () => {
+        setTranscript("");
         recognition.start();
         setIsRecording(true);
     };
@@ -47,6 +53,7 @@ const SpeechRecognition = () => {
             <button onClick={stopRecognition}>Stop</button>
             {isRecording && <p>Voice Recording Started...</p>}
             <p>{transcript}</p>
+            <p>{counter}</p>
         </div>
     );
 };
