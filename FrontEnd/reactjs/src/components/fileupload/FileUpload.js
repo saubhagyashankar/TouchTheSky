@@ -5,6 +5,7 @@ const  FileUpload = () => {
     const [selectedFile, setSelectedFile] =useState(null);
 
     const onChangeHandler = (e) => {
+        console.log(e.target.files[0])
         setSelectedFile(e.target.files[0]);
     }
 
@@ -16,7 +17,9 @@ const  FileUpload = () => {
             method: 'POST',
             body: data,
         }).then(res => res.json()).then(res => {
-            //todo: handle
+            //todo: handleres
+            if(res.message)
+                alert(res.message)
         })
 
     }
@@ -24,7 +27,7 @@ const  FileUpload = () => {
 
   return (
     <div>FileUpload
-        <input type='file' name='file' onChange={e => onChangeHandler}></input>
+        <input type='file' name='file' onChange={e => onChangeHandler(e)}></input>
         <button onClick={handleFileUpload}>Upload</button>
         
     </div>

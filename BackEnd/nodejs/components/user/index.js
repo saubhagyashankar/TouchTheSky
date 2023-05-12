@@ -9,7 +9,7 @@ const XLSX = require('xlsx');
 
 const uploadsFolder = __dirname + '/../files/'
 
-const upload = multer({dest: uploadsFolder});
+const upload = multer({storage: multer.memoryStorage()});
 const GeneralData = require('../../models/GeneralData');
 
 const USER_FILE_PATH = __dirname + '/../files/users.json';
@@ -89,20 +89,31 @@ userController.post('/', async(req, res) => {
 
 userController.post('/togeneraldata', upload.single('file'), (req, res) => {
     // Read the Excel file and convert the data to JSON
-  const workbook = XLSX.readFile(req.file.path);
+  const workbook = XLSX.read(req.file.buffer, {type: 'buffer'});
   const sheet_name_list = workbook.SheetNames;
   const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
   // Iterate over the data and save each row to the database
+  try{
   data.forEach((row) => {
     let item = new GeneralData(row);
-    item.save((err) => {
-      if (err) return console.error(err);
-      console.log('Row saved to the database!');
-    });
-  });
 
-  res.send('File uploaded and data saved to the database!');
+        item.save();
+    });
+    }catch(err){
+        res.status(400).send(err);
+    }
+  res.send({message: 'File uploaded and data saved to the database!'});
+})
+
+
+userController.get('/getAllGeneralData', async(req, res) => {
+    try{
+        const data = await GeneralData.find({})
+        res.status(200).send({data: data})
+    }catch(err){
+        res.status(400).send(err)
+    }   
 })
 
 module.exports = userController
