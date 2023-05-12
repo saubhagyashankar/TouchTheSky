@@ -12,6 +12,7 @@ const Header = (props) => {
     const page = window.location.href.split('/').pop()
 
     useEffect(() => {
+        console.log(UserDetails.user);
         if (UserDetails.user == null) {
             console.log(Cookies.get('userName'))
             console.log(window.location.href)

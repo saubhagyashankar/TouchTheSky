@@ -23,7 +23,9 @@ const Login = () => {
             credentials: 'include'
         }).then(res => res.json()).then(res => {
             if(res.success){
-                UserDetails.user = res.UserDetails;
+                console.log('login.js', res.userDetails);
+                UserDetails.user = res.userDetails;
+
                 navigate('/home')
             }
         })
