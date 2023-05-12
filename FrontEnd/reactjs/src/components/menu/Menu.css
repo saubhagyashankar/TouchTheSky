@@ -1,7 +1,8 @@
 #flyoutMenu {
     width: 100vw;
     height: 100vh;
-    background-color: #5c4cf1;
+    /* background-color: #5c4cf1; */
+    background-color: #8A2BE2;
     position: fixed;
     top: 0;
     left: 0;
@@ -31,6 +32,10 @@
    
   #flyoutMenu h2 :hover {
     text-decoration: underline;
+    cursor: pointer;
+
+  }
+  #flyoutMenu h3 :hover {
     cursor: pointer;
 
   }

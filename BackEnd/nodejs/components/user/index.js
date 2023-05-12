@@ -109,8 +109,19 @@ userController.post('/togeneraldata', upload.single('file'), (req, res) => {
 
 userController.get('/getAllGeneralData', async(req, res) => {
     try{
-        const data = await GeneralData.find({})
+        const data = await GeneralData.find({owner: null})
         res.status(200).send({data: data})
+    }catch(err){
+        res.status(400).send(err)
+    }   
+})
+
+userController.get('/getAllMyData', async(req, res) => {
+    try{
+        const userName = req.query.userName;
+        console.log('getAllMyData', userName);
+        const data = await GeneralData.find({owner: userName, successFailure: null})
+        res.status(200).send({data: data, count: data.length});
     }catch(err){
         res.status(400).send(err)
     }   

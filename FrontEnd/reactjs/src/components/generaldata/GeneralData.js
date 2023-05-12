@@ -15,16 +15,38 @@ import Header from '../Header';
 const GeneralData = () => {
 
     const [data, setData] = useState(null);
+    const [mainData, setMainData] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() =>{
         //fetch all general data
         const URL = BACKEND_URL + '/user/getAllGeneralData';
-        fetch(URL).then(res => res.json()).then(res => setData(res.data))
+        fetch(URL).then(res => res.json()).then(res => {
+            setMainData(res.data);
+            setData(res.data)})
     }, [])
 
     const openSpecificPart = (part) => {
         navigate('/specific-part', {state: {part: part}})
+    }
+
+    const getUsedParts = async() => {
+        let tData = mainData;
+        tData = tData.filter(item =>  item.condition === "Used")
+        console.log(tData)
+        setData(tData);
+    }
+
+    const getNewParts = () => {
+        let tData = mainData;
+        tData = tData.filter(item =>  item.condition == 'New')
+        setData(tData);
+    }
+
+    const getAllParts = () => {
+        let tData = mainData;
+        setData(tData);
+
     }
     
 
@@ -34,9 +56,15 @@ const GeneralData = () => {
             <MenuContainer></MenuContainer>
             General Data
         </Header>
+        <div style={{justifyContent:'right'}}>
+
+        <button onClick={_ => getUsedParts()}>Used</button>
+        <button onClick={getNewParts}>New</button>
+        <button onClick={getAllParts}>All</button>
+        </div>
         <div  style={{width: '100%', height: '100%', flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',justifyContent: "space-between", display: 'flex'}}>
+        flexDirection: 'row', marginLeft: '40px',
+        flexWrap: 'wrap',justifyContent: "flex-start", display: 'flex'}}>
 
         {data && data.map((part, index) => (
             <MDBCard onClick={() => openSpecificPart(part)} style={{height: '200px', width: '300px', marginTop: '3px',}} key={index} alignment='center'>

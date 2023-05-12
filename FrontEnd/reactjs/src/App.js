@@ -8,6 +8,9 @@ import GeneratePetNames from './components/generatepetnames/GeneratePetNames';
 import Dashboard from './components/dashboards/Dashboard';
 import SpecificPart from './components/generaldata/SpecificPart';
 import GeneralData from './components/generaldata/GeneralData';
+import MyData from './components/mydata/MyData';
+import UploadParts from './components/uploadparts/UploadParts';
+import RecycleRepurpose from './components/mydata/RecycleRepurpose';
 
 
 function App() {
@@ -23,9 +26,11 @@ function App() {
           <Route  path='/logout' element={<Logout></Logout>}></Route>
           <Route  path='/generate-pet-names' element={<GeneratePetNames></GeneratePetNames>}></Route>
           <Route  path='/dashboard' element={<Dashboard></Dashboard>}></Route>
-          <Route  path='/specific-page' element={<SpecificPart></SpecificPart>}></Route>
+          <Route  path='/specific-part' element={<SpecificPart></SpecificPart>}></Route>
           <Route  path='/general-data' element={<GeneralData></GeneralData>}></Route>
-          <Route  path='/my-data' element={<SpecificPart></SpecificPart>}></Route>
+          <Route  path='/my-data' element={<MyData></MyData>}></Route>
+          <Route  path='/upload-parts' element={<UploadParts></UploadParts>}></Route>
+          <Route  path='/recycle-repurpose-page' element={<RecycleRepurpose></RecycleRepurpose>}></Route>
           
         </Routes>
       
