@@ -28,7 +28,9 @@ const Dashboard = () => {
                 Dashboard
             </Header>
             {/* All the graphs go here */}
+            {data && 
             <ChartRecycle data={data}></ChartRecycle>
+            }
         </div>
     )
 }
