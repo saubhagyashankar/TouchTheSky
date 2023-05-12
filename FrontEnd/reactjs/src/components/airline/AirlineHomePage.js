@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '../Header'
 import FileUpload from '../fileupload/FileUpload'
 import { BACKEND_URL } from '../static/Constants'
+import GeneralData from '../../components/generaldata/GeneralData'
 
 function AirlineHomePage() {
     const [data, setData] = useState(null)
@@ -23,6 +24,12 @@ function AirlineHomePage() {
                 {item.partName}
             </div>
         ))}</p>
+
+
+            <GeneralData>
+
+            </GeneralData>
+
         </div>
   )
 }
