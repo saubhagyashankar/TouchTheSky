@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import ChartRecycle from './ChartRecycle';
 import { BACKEND_URL } from '../static/Constants';
 import { UserDetails } from '../static/UserDetails';
+import MenuContainer from '../menu/MenuContainer';
+import Header from '../Header';
+
 
 const Dashboard = () => {
     const [data, setData] = useState(null)
@@ -20,6 +23,10 @@ const Dashboard = () => {
 
     return (
         <div>
+            <Header>
+                <MenuContainer></MenuContainer>
+                Dashboard
+            </Header>
             {/* All the graphs go here */}
             <ChartRecycle data={data}></ChartRecycle>
         </div>

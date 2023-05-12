@@ -4,6 +4,7 @@ import FileUpload from '../fileupload/FileUpload'
 import { BACKEND_URL } from '../static/Constants'
 import GeneralData from '../../components/generaldata/GeneralData'
 import Dashboard from '../dashboards/Dashboard'
+import MenuContainer from '../menu/MenuContainer'
 
 function AirlineHomePage() {
     const [data, setData] = useState(null)
@@ -14,9 +15,7 @@ function AirlineHomePage() {
     }
   return (
     <div>
-        <Header>
-            AirlineHomePage
-        </Header>
+        
 
         <Dashboard></Dashboard>
 

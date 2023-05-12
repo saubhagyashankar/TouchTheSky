@@ -9,6 +9,8 @@ import {
   } from 'mdb-react-ui-kit';
 import { BACKEND_URL } from '../static/Constants';
 import { useNavigate } from 'react-router-dom';
+import MenuContainer from '../menu/MenuContainer';
+import Header from '../Header';
 
 const GeneralData = () => {
 
@@ -28,13 +30,17 @@ const GeneralData = () => {
 
   return (
     <div>
+        <Header>
+            <MenuContainer></MenuContainer>
+            General Data
+        </Header>
         <div  style={{width: '100%', height: '100%', flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',justifyContent: "space-between", display: 'flex'}}>
 
         {data && data.map((part, index) => (
             <MDBCard onClick={() => openSpecificPart(part)} style={{height: '200px', width: '300px', marginTop: '3px',}} key={index} alignment='center'>
-             <MDBCardHeader>{part.age}</MDBCardHeader>
+             <MDBCardHeader>{part.age} yrs</MDBCardHeader>
              <MDBCardBody>
                <MDBCardTitle>{part.partName}</MDBCardTitle>
                <MDBCardText>{part.materialComposition}</MDBCardText>
