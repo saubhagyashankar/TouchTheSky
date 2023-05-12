@@ -56,7 +56,7 @@ const GeneralData = () => {
             <MenuContainer></MenuContainer>
             General Data
         </Header>
-        <div style={{justifyContent:'right'}}>
+        <div style={{marginRight: '0px'}}>
 
         <button onClick={_ => getUsedParts()}>Used</button>
         <button onClick={getNewParts}>New</button>

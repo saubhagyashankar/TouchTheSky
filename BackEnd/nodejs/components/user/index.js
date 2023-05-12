@@ -142,4 +142,20 @@ userController.get('/getUserDashBoardData', async(req, res) => {
     }
 })
 
+
+userController.post('/buyPart', (req, res) => {
+    const userName = req.query.userName;
+    const id = req.query.id;
+    
+    GeneralData.findById(id).then((data) => {
+        try{
+            data.owner = userName;
+            data.save();
+            res.send({message: 'Successfully purchased'});
+        }catch(err){
+            res.status(400).send(err)
+        }
+    })
+})
+
 module.exports = userController

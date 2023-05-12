@@ -23,13 +23,13 @@ const RecycleRepurpose = () => {
 
             console.log("imp", part)
             const URL = BACKEND_URL + '/ai/getRecommendationForPart/';
-            // fetch(URL, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(part)
-            // }).then(res => res.json()).then(res => setAIRes(res.result))
+            fetch(URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(part)
+            }).then(res => res.json()).then(res => setAIRes(res.result))
             keyValues()
             
         }
