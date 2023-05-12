@@ -16,8 +16,9 @@ function AirlineHomePage() {
   return (
     <div>
         
-
         <Dashboard></Dashboard>
+        {/* 
+
 
         <FileUpload></FileUpload>
         <button onClick={getAllGeneralData}>Fetch data</button>
@@ -30,7 +31,7 @@ function AirlineHomePage() {
 
             <GeneralData>
 
-            </GeneralData>
+            </GeneralData> */}
 
         </div>
   )

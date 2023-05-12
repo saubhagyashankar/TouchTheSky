@@ -56,6 +56,7 @@ const Login = () => {
                         <input onChange={e => setPwd(e.target.value)} placeholder='Enter Password' 
                         type='password' name='password' id='password' />
                     </div>
+                    <br/>
 
                     <button className='login-button' onClick={e => handleLogin(e)}>Login</button>
                     <button className='login-button' onClick={_ => navigate('/forgot-password')}>Forgot Password</button>
