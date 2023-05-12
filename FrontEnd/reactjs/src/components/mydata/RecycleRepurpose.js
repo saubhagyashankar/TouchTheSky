@@ -67,7 +67,7 @@ const RecycleRepurpose = () => {
             ReImagine Future
         </Header>
         <p>
-            {!aiRes && `Suggestion from our AI....` }
+            {!aiRes && `Generating Insights from our AI.... Please wait` }
             
             </p>
         
