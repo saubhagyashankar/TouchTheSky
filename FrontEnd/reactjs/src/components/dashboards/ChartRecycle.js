@@ -10,7 +10,7 @@ am4core.useTheme(am4themes_animated);
 //
 const ChartRecycle = ({data}) => {
   
-
+  console.log(data.length);
   const recycledSuccessPie = () => {
      // Create pie chart instance
      const pieChart = am4core.create('pie-chart', am4charts.PieChart);

@@ -13,8 +13,7 @@ const Dashboard = () => {
         const URL = BACKEND_URL + '/user/getUserDashBoardData/?userName=' + encodeURIComponent(UserDetails.user.userName) + '&role=' + encodeURIComponent(UserDetails.user.role);
         fetch(URL).then(res => res.json()).then(res => setData(res.data))
       }
-
-
+      
       useEffect(() => {
         //getData
         getSetDashboardData();
