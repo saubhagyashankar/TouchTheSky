@@ -32,6 +32,12 @@ const Dashboard = () => {
                 Dashboard
             </Header>
             {/* All the graphs go here */}
+            <small><b><i>
+
+                You are helping re-image the future using the circular economy
+            </i>
+                </b>
+                 </small>
             {data && 
             <ChartRecycle data={data}></ChartRecycle>
             }
