@@ -12,7 +12,7 @@ const Header = ({children}) => {
     const page = window.location.href.split('/').pop()
     useEffect(() => {
         console.log(UserDetails.user, 'page', page);
-        if (UserDetails.user == null) {
+        if (UserDetails.user == null && page!= ''&& page!= 'logout') {
             console.log(Cookies.get('userName'))
             console.log(window.location.href)
             const URL = BACKEND_URL + '/user/';

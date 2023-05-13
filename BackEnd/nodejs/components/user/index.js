@@ -56,7 +56,7 @@ userController.get('/', async(req, res) => {
 })
 
 
-userController.get('/logout', (req, res) => {
+userController.get('/logout', async(req, res) => {
     req.session = null;
     res.clearCookie('userName')
     res.send({message: 'User logged out'})
@@ -137,7 +137,10 @@ userController.get('/getUserDashBoardData', async(req, res) => {
             if (user){
                 const data = await GeneralData.find({owner: userName, successFailure: {$ne: null}, del: true})
                 res.status(200).send({data: data, count: data.length})
+                return;
             }
+            res.status(200).send({data: "User not found"})
+            return;
         }if(role == 'M'){
 
             const user = await Users.find({userName: userName, role: role})
@@ -146,17 +149,23 @@ userController.get('/getUserDashBoardData', async(req, res) => {
                 const data2 = await GeneralData.find({owner: {$ne: userName},remanufactureFacility: userName, successFailure: {$ne: null}, del: true})
                 data.push(data2);
                 res.status(200).send({data: data, count: data.length})
+                return;
             }
+            res.status(200).send({data: "User not found"})
+            return;
         }else{
             const user = await Users.find({userName: userName, role: role})
             if (user){
                 const data = await GeneralData.find({recycledFacility: userName, successFailure: {$ne: null}, del: true})
                 res.status(200).send({data: data, count: data.length})
+                return;
             }
+            res.status(200).send({data: "User not found"})
+            return;
         }
         }catch(err){
-        res.status(400).send(err)
-    }
+            res.status(400).send(err)
+        }
 })
 
 
