@@ -34,22 +34,25 @@ const Dashboard = () => {
             {/* All the graphs go here */}
             <small><b><i>
 
-                You are helping re-image the future using the circular economy
+                Be Proud!, You are helping Re-Imagine the future using the Sustainable circular economy!
             </i>
                 </b>
                  </small>
+                     { data &&
+                       <ChartPieMaterial data={data}></ChartPieMaterial>
+                     }
+                     {data && 
+                       <ChartCategory data ={data}></ChartCategory>
+                     }
+                 <div style={{display: 'flex' ,    flexDirection: "column"}}>
+
             {data && 
-            <ChartRecycle data={data}></ChartRecycle>
-            }
+            <ChartRecycle style={{justifyContent: ''}}  data={data}></ChartRecycle>
+        }
             {data &&
               <ChartMaterial data={data}></ChartMaterial>
             }
-            { data &&
-              <ChartPieMaterial data={data}></ChartPieMaterial>
-            }
-            {data && 
-              <ChartCategory data ={data}></ChartCategory>
-            }
+            </div>
         </div>
     )
 }
