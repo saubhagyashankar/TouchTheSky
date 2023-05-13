@@ -131,13 +131,21 @@ userController.get('/getUserDashBoardData', async(req, res) => {
     try{
         userName = req.query.userName
         role = req.query.role
+        if(role != 'R'){
 
-        const user = await Users.find({userName: userName, role: role})
-        if (user){
-            const data = await GeneralData.find({owner: userName, successFailure: {$ne: null}, del: false, auctionRemanufacturing: null, auctionRecycling: null})
-            res.status(200).send({data: data, count: data.length})
+            const user = await Users.find({userName: userName, role: role})
+            if (user){
+                const data = await GeneralData.find({owner: userName, successFailure: {$ne: null}, del: true})
+                res.status(200).send({data: data, count: data.length})
+            }
+        }else{
+            const user = await Users.find({userName: userName, role: role})
+            if (user){
+                const data = await GeneralData.find({recycledFacility: userName, successFailure: {$ne: null}, del: true})
+                res.status(200).send({data: data, count: data.length})
+            }
         }
-    }catch(err){
+        }catch(err){
         res.status(400).send(err)
     }
 })
@@ -156,6 +164,34 @@ userController.post('/buyPart', (req, res) => {
             res.status(400).send(err)
         }
     })
+})
+
+
+userController.get('/getRecycleParts', async(req, res) => {
+    try{
+        const data = await GeneralData.find({auctionRecycling: true, successFailure: null})
+        res.send({data: data, count: data.length})
+    }catch(err){
+        res.status(400).send(err)
+    }
+})
+
+userController.post('/recycleDone', async(req, res) => {
+    try{
+        const id = req.query.id;
+        const userName = req.query.userName;
+        const success = req.query.successFailure;
+        console.log(id, userName, success)
+        const data = await GeneralData.findById(id).then(data => {
+            data.recycledFacility = userName;
+            data.successFailure = success;
+            data.del = true;
+            data.save();
+        })
+        res.status(200).send({message: 'Success'});
+    }catch(err){
+        res.status(400).send(err)
+    }
 })
 
 module.exports = userController

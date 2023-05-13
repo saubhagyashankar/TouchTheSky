@@ -14,8 +14,8 @@ const RecycleRepurpose = () => {
     let {state} = useLocation()
 
     useEffect(() => {
-        console.log(state.part);
-        setPart(state.part)
+        // console.log(state.part);
+        setPart(state?.part)
     }, [])
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const RecycleRepurpose = () => {
             
             </p>
         
-            <b>
+            <b>AI: 
             {aiRes}
             </b>
             <br/>

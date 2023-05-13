@@ -11,6 +11,8 @@ import GeneralData from './components/generaldata/GeneralData';
 import MyData from './components/mydata/MyData';
 import UploadParts from './components/uploadparts/UploadParts';
 import RecycleRepurpose from './components/mydata/RecycleRepurpose';
+import RecycleParts from './components/recyclefacility/RecycleParts';
+import CompleteRecycle from './components/recyclefacility/CompleRecycle';
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
           <Route  path='/my-data' element={<MyData></MyData>}></Route>
           <Route  path='/upload-parts' element={<UploadParts></UploadParts>}></Route>
           <Route  path='/recycle-repurpose-page' element={<RecycleRepurpose></RecycleRepurpose>}></Route>
+          <Route  path='/recycle-parts' element={<RecycleParts></RecycleParts>}></Route>
+          <Route  path='/complete-recycle' element={<CompleteRecycle></CompleteRecycle>}></Route>
           
         </Routes>
       

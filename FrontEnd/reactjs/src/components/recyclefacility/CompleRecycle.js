@@ -5,13 +5,14 @@ import MenuContainer from '../menu/MenuContainer'
 import { BACKEND_URL } from '../static/Constants'
 import { UserDetails } from '../static/UserDetails'
 
-const SpecificPart = () => {
+const CompleteRecycle = () => {
 
     const [part, setPart] = useState(null)
     const [id, setId] = useState(null);
     const [keys, setKeys] = useState(null)
     const [values, setValues] = useState(null)
     const [aiRes, setAIRes] = useState(null);
+    const [page, setPage] = useState(1);
     let {state} = useLocation()
 
     const navigate = useNavigate();
@@ -68,11 +69,36 @@ const SpecificPart = () => {
     
     }
 
+    const handleRecycleSuccess = () => {
+        const URL = BACKEND_URL + '/user/recycleDone/?userName=' + encodeURIComponent(UserDetails.user.userName) + '&successFailure=' + encodeURIComponent(true)+ '&id=' + encodeURIComponent(id);
+        fetch(URL, {
+            method: 'POST',
+        }).then(res => res.json()).then(res => {
+            if(res.message)
+                alert(res.message);
+            navigate('/recycle-parts')
+        })
+    }
+
+    const handleRecycleFailure = () => {
+        const URL = BACKEND_URL + '/user/recycleDone/?userName=' + encodeURIComponent(UserDetails.user.userName) + '&successFailure=' + encodeURIComponent(false)+ '&id=' + encodeURIComponent(id);
+        fetch(URL, {
+            method: 'POST',
+        }).then(res => res.json()).then(res => {
+            if(res.message)
+                alert(res.message);
+            navigate('/recycle-parts')
+        })
+    }
+
+
+
+    if(page === 1)
   return (
     <div>
         <Header>
             <MenuContainer></MenuContainer>
-            SpecificPart
+            CompleteRecycle
             </Header>
             <p>
             {!aiRes && `Generating Insights from our AI.... Please wait` }
@@ -109,12 +135,20 @@ const SpecificPart = () => {
             </ul>
             <div >
 
-                <button onClick={purchaseThisPart} style={{marginLeft: 'auto', marginRight: 'auto'}}>Buy</button>
+                <button onClick={() => setPage(2)} style={{marginLeft: 'auto', marginRight: 'auto'}}>Start Recycling</button>
             </div>
         
     </div>
 
   )
+  if(page=== 2)
+        return (
+            <div>
+                <h4>Was the recycling Successful - </h4>
+                <button onClick={handleRecycleSuccess}>Yes</button>
+                <button onClick={handleRecycleFailure}>No</button>
+            </div>
+        )
 }
 
-export default SpecificPart
+export default CompleteRecycle

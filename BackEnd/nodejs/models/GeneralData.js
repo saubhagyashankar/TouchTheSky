@@ -108,6 +108,9 @@ const GeneralData = mongoose.Schema({
     }, successFailure:{
         type: Boolean,
         default: null
+    },recycledFacility: {
+        type: String,
+        default: null
     }
 
 
