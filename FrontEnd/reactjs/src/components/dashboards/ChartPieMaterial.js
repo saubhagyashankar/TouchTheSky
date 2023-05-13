@@ -3,7 +3,33 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 
-function ChartPieMaterial() {
+function ChartPieMaterial({data}) {
+  let frequencyMap = {};
+let successMap = {};
+console.log(data);
+let Material = [];
+const myMap = new Map();
+for (let i = 0; i < data.length; i++) {
+  let str = data[i].materialComposition;
+  let ok  = data[i].successFailure;
+  if (frequencyMap[str]) {
+    frequencyMap[str]++;
+    if(ok)
+    successMap[str]++;
+    myMap.set(str, { category: str, value: (successMap[str]/frequencyMap[str])*100});
+  } else {
+    frequencyMap[str] = 1;
+    if(ok)
+    successMap[str] = 1;
+    else
+    successMap[str] = 0;
+    myMap.set(str, { category: str, value: (successMap[str]/frequencyMap[str])*100});
+  }
+}
+for (const [key, value] of myMap) {
+  Material.push(value);
+}
+  console.log(Material);
   useEffect(() => {
     // Apply chart themes
     am4core.useTheme(am4themes_animated);
@@ -24,15 +50,7 @@ function ChartPieMaterial() {
     series.slices.template.strokeOpacity = 1;
 
     // Set data
-    series.data = [
-      { category: 'One', value: 10 },
-      { category: 'Two', value: 9 },
-      { category: 'Three', value: 6 },
-      { category: 'Four', value: 5 },
-      { category: 'Five', value: 4 },
-      { category: 'Six', value: 3 },
-      { category: 'Seven', value: 1 },
-    ];
+    series.data = Material;
 
     // Add and configure Series label
     const label = series.createChild(am4core.Label);
@@ -47,7 +65,7 @@ function ChartPieMaterial() {
 
   }, []);
 
-  return <div id="unique-chart-id" style={{ width: '100%', height: '500px' }} />;
+  return <div id="unique-chart-id" style={{ textAlign:'center' , display:'flex' , width: '100%', height: '500px' }} />;
 }
 
 export default ChartPieMaterial;

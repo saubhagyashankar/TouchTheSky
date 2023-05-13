@@ -9,8 +9,6 @@ import ChartMaterial from './ChartMaterial';
 import ChartPieMaterial from './ChartPieMaterial';
 
 
-
-
 const Dashboard = () => {
     const [data, setData] = useState(null)
 

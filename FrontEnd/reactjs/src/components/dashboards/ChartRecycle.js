@@ -5,9 +5,15 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { BACKEND_URL } from '../static/Constants';
 import { UserDetails } from '../static/UserDetails';
 
+
 am4core.useTheme(am4themes_animated);
 
 //
+const myStyle = {
+  
+  display : 'flex',
+  textAlign: 'center'
+};
 const ChartRecycle = ({data}) => {
   
   let count = 0;
@@ -38,32 +44,9 @@ const ChartRecycle = ({data}) => {
      pieChart.exporting.filePrefix = 'pie-chart-export';
      pieChart.exporting.useWebFonts = false;
  
-     // Create bar chart instance
-     const barChart = am4core.create('bar-chart', am4charts.XYChart);
-     barChart.data = [
-       { category: 'Category 1', value: 10 },
-       { category: 'Category 2', value: 20 },
-       { category: 'Category 3', value: 15 },
-     ];
-     const categoryAxis = barChart.xAxes.push(new am4charts.CategoryAxis());
-     categoryAxis.dataFields.category = 'category';
-     categoryAxis.title.text = 'Category';
-     const valueAxis = barChart.yAxes.push(new am4charts.ValueAxis());
-     valueAxis.title.text = 'Value';
-     const series = barChart.series.push(new am4charts.ColumnSeries());
-     series.dataFields.valueY = 'value';
-     series.dataFields.categoryX = 'category';
-     series.name = 'Value';
-     series.columns.template.tooltipText = '{categoryX}: [bold]{valueY}[/]';
-     barChart.scrollbarX = new am4charts.XYChartScrollbar();
-     barChart.exporting.menu = new am4core.ExportMenu();
-     barChart.exporting.filePrefix = 'bar-chart-export';
-     barChart.exporting.useWebFonts = false;
- 
      // Clean up on unmount
      return () => {
        pieChart.dispose();
-       barChart.dispose();
      };
   }
 
@@ -73,12 +56,9 @@ const ChartRecycle = ({data}) => {
   }, [data])
 
 
-  
-
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={ myStyle }>
       <div id="pie-chart" style={{ width: '50%', height: '500px' }}></div>
-      <div id="bar-chart" style={{ width: '50%', height: '500px' }}></div>
     </div>
   );
 };
