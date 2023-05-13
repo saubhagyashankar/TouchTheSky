@@ -120,7 +120,7 @@ userController.get('/getAllMyData', async(req, res) => {
     try{
         const userName = req.query.userName;
         console.log('getAllMyData', userName);
-        const data = await GeneralData.find({owner: userName, successFailure: null})
+        const data = await GeneralData.find({owner: userName, successFailure: null, auctionRecycling: null, auctionRemanufacturing: null})
         res.status(200).send({data: data, count: data.length});
     }catch(err){
         res.status(400).send(err)
@@ -131,11 +131,20 @@ userController.get('/getUserDashBoardData', async(req, res) => {
     try{
         userName = req.query.userName
         role = req.query.role
-        if(role != 'R'){
+        if(role == 'A'){
 
             const user = await Users.find({userName: userName, role: role})
             if (user){
                 const data = await GeneralData.find({owner: userName, successFailure: {$ne: null}, del: true})
+                res.status(200).send({data: data, count: data.length})
+            }
+        }if(role == 'M'){
+
+            const user = await Users.find({userName: userName, role: role})
+            if (user){
+                let data = await GeneralData.find({owner: userName, successFailure: {$ne: null}, del: true})
+                const data2 = await GeneralData.find({owner: {$ne: userName},remanufactureFacility: userName, successFailure: {$ne: null}, del: true})
+                data.push(data2);
                 res.status(200).send({data: data, count: data.length})
             }
         }else{
@@ -176,6 +185,15 @@ userController.get('/getRecycleParts', async(req, res) => {
     }
 })
 
+userController.get('/getRemanufactureParts', async(req, res) => {
+    try{
+        const data = await GeneralData.find({auctionRemanufacturing: true, successFailure: null})
+        res.send({data: data, count: data.length})
+    }catch(err){
+        res.status(400).send(err)
+    }
+})
+
 userController.post('/recycleDone', async(req, res) => {
     try{
         const id = req.query.id;
@@ -192,6 +210,59 @@ userController.post('/recycleDone', async(req, res) => {
     }catch(err){
         res.status(400).send(err)
     }
+})
+
+
+userController.post('/remanufactureDone', async(req, res) => {
+    try{
+        const id = req.query.id;
+        const userName = req.query.userName;
+        const success = req.query.successFailure;
+        console.log(id, userName, success)
+        const data = await GeneralData.findById(id).then(data => {
+            data.remanufactureFacility = userName;
+            data.successFailure = success;
+            data.del = true;
+            data.save();
+        })
+        res.status(200).send({message: 'Success'});
+    }catch(err){
+        res.status(400).send(err)
+    }
+})
+
+userController.post('/recycleAuction', async(req, res) => {
+    try{
+        const id = req.query.id;
+        const userName = req.query.userName;
+        console.log(id, userName)
+        const data = await GeneralData.findById(id).then(data => {
+            data.auctionRecycling = true;
+            data.del = false;
+            data.save();
+        })
+        res.status(200).send({message: 'Success'});
+    }catch(err){
+        res.status(400).send(err)
+    }
+
+})
+
+userController.post('/remanufactureAuction', async(req, res) => {
+    try{
+        const id = req.query.id;
+        const userName = req.query.userName;
+        console.log(id, userName)
+        const data = await GeneralData.findById(id).then(data => {
+            data.auctionRemanufacturing = true;
+            data.del = false;
+            data.save();
+        })
+        res.status(200).send({message: 'Success'});
+    }catch(err){
+        res.status(400).send(err)
+    }
+
 })
 
 module.exports = userController

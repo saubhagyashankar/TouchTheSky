@@ -5,7 +5,7 @@ import MenuContainer from '../menu/MenuContainer'
 import { BACKEND_URL } from '../static/Constants'
 import { UserDetails } from '../static/UserDetails'
 
-const CompleteRecycle = () => {
+const CompleteRemanufacturing = () => {
 
     const [part, setPart] = useState(null)
     const [id, setId] = useState(null);
@@ -54,40 +54,26 @@ const CompleteRecycle = () => {
         }
     }
 
-    const purchaseThisPart = () => {
-        const URL = BACKEND_URL + '/user/buyPart/?userName=' + encodeURIComponent(UserDetails.user.userName) + '&id=' + encodeURIComponent(id);
-        fetch(URL, {
-            method: 'POST'
-        }).then(res => res.json()).then(res => {
-            if(res.message){
-                alert(res.message);
-                navigate('/general-data');
-            }else{
-                alert("Something went wrong")
-            }
-        })
-    
-    }
 
-    const handleRecycleSuccess = () => {
-        const URL = BACKEND_URL + '/user/recycleDone/?userName=' + encodeURIComponent(UserDetails.user.userName) + '&successFailure=' + encodeURIComponent(true)+ '&id=' + encodeURIComponent(id);
+    const handleRemanufactureSuccess = () => {
+        const URL = BACKEND_URL + '/user/remanufactureDone/?userName=' + encodeURIComponent(UserDetails.user.userName) + '&successFailure=' + encodeURIComponent(true)+ '&id=' + encodeURIComponent(id);
         fetch(URL, {
             method: 'POST',
         }).then(res => res.json()).then(res => {
             if(res.message)
                 alert(res.message);
-            navigate('/recycle-parts')
+            navigate('/remanufacture-parts')
         })
     }
 
-    const handleRecycleFailure = () => {
-        const URL = BACKEND_URL + '/user/recycleDone/?userName=' + encodeURIComponent(UserDetails.user.userName) + '&successFailure=' + encodeURIComponent(false)+ '&id=' + encodeURIComponent(id);
+    const handleRemanufactureFailure = () => {
+        const URL = BACKEND_URL + '/user/remanufactureDone/?userName=' + encodeURIComponent(UserDetails.user.userName) + '&successFailure=' + encodeURIComponent(false)+ '&id=' + encodeURIComponent(id);
         fetch(URL, {
             method: 'POST',
         }).then(res => res.json()).then(res => {
             if(res.message)
                 alert(res.message);
-            navigate('/recycle-parts')
+            navigate('/remanufacture-parts')
         })
     }
 
@@ -98,7 +84,7 @@ const CompleteRecycle = () => {
     <div>
         <Header>
             <MenuContainer></MenuContainer>
-            CompleteRecycle
+            CompleteRemanufacturing
             </Header>
             <p>
             {!aiRes && `Generating Insights from our AI.... Please wait` }
@@ -135,7 +121,7 @@ const CompleteRecycle = () => {
             </ul>
             <div >
 
-                <button onClick={() => setPage(2)} style={{marginLeft: 'auto', marginRight: 'auto'}}>Start Recycling</button>
+                <button onClick={() => setPage(2)} style={{marginLeft: 'auto', marginRight: 'auto'}}>Start Remanufacturing</button>
             </div>
         
     </div>
@@ -144,11 +130,11 @@ const CompleteRecycle = () => {
   if(page=== 2)
         return (
             <div>
-                <h4>Was the recycling Successful - </h4>
-                <button onClick={handleRecycleSuccess}>Yes</button>
-                <button onClick={handleRecycleFailure}>No</button>
+                <h4>Was the remanufacturing Successful - </h4>
+                <button onClick={handleRemanufactureSuccess}>Yes</button>
+                <button onClick={handleRemanufactureFailure}>No</button>
             </div>
         )
 }
 
-export default CompleteRecycle
+export default CompleteRemanufacturing

@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { BACKEND_URL } from '../static/Constants'
 import Header from '../Header'
 import MenuContainer from '../menu/MenuContainer'
+import { UserDetails } from '../static/UserDetails'
 
 const RecycleRepurpose = () => {
 
     const [part, setPart] = useState(null)
+    const [id, setId] = useState(null)
     const [keys, setKeys] = useState([])
     const [values, setValues] = useState([])
     const [aiRes, setAIRes] = useState(null)
     const [tempList, setLi] = useState([])
     let {state} = useLocation()
 
+    const navigate = useNavigate()
     useEffect(() => {
         // console.log(state.part);
         setPart(state?.part)
@@ -47,7 +50,8 @@ const RecycleRepurpose = () => {
 
             console.log("keyvalues", part)
             console.log(Object.keys(part))
-            delete part._id;
+            setId(part._id);
+            // delete part._id;
             delete part.__v;
             delete part.owner;
             delete part.successFailure;
@@ -59,6 +63,30 @@ const RecycleRepurpose = () => {
             
         }
     }
+    
+    const handleRecycle = () => {
+        const URL = BACKEND_URL + '/user/recycleAuction/?userName='+encodeURIComponent(UserDetails.user.userName)+'&id='+ encodeURIComponent(id);
+        fetch(URL, {
+            method: 'POST'
+        }).then(res => res.json()).then(res => {
+            if (res.message)
+                alert(res.message)
+            navigate('/my-data')
+        })
+    
+    }
+
+   const handleReManufacturer = () => {
+    const URL = BACKEND_URL + '/user/remanufactureAuction/?userName='+encodeURIComponent(UserDetails.user.userName)+'&id='+ encodeURIComponent(id);
+        fetch(URL, {
+            method: 'POST'
+        }).then(res => res.json()).then(res => {
+            if (res.message)
+                alert(res.message)
+            navigate('/my-data')
+        })
+   }
+
 
   return (
     <div>
@@ -101,9 +129,9 @@ const RecycleRepurpose = () => {
                 }
             </ul>
                 </div>
-            <button>Re-Cycle</button>
-            <button>Re-Manufacture</button>
-            <button>Re-Purpose</button>
+            <button onClick={handleRecycle}>Re-Cycle</button>
+            <button onClick={handleReManufacturer}>Re-Manufacture</button>
+            <button >Re-Purpose</button>
     </div>
   )
 }

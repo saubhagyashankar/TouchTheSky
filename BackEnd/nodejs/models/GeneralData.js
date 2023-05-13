@@ -111,6 +111,9 @@ const GeneralData = mongoose.Schema({
     },recycledFacility: {
         type: String,
         default: null
+    },remanufactureFacility: {
+        type: String,
+        default: null
     }
 
 

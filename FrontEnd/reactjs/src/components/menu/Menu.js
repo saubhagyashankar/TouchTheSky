@@ -16,9 +16,15 @@ const Menu = ({ isVisible}) => {
                 </h3>   
             <h2><Link to='/dashboard' style={{color: 'white'}}>Dashboard</Link></h2>
             {UserDetails.user && (UserDetails.user.role == 'M' || UserDetails.user.role == 'A') && 
-            <h2><Link to='/general-data' style={{color: 'white'}}>Buy Parts</Link></h2> &&
-            <h2><Link to='/my-data' style={{color: 'white'}}>My Parts</Link></h2> &&
+            <div>
+            <h2><Link to='/general-data' style={{color: 'white'}}>Buy Parts</Link></h2>
+            <h2><Link to='/my-data' style={{color: 'white'}}>My Parts</Link></h2> 
             <h2><Link to='/upload-parts' style={{color: 'white'}}>Upload Parts</Link></h2>
+            </div>
+            }
+            {
+                UserDetails.user && UserDetails.user.role == 'M' &&
+                <h2><Link to='/remanufacture-parts' style={{color: 'white'}}>ReManufacture Part</Link></h2>
             }
             {
                 UserDetails.user && (UserDetails.user.role == 'R') &&

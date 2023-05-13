@@ -13,6 +13,8 @@ import UploadParts from './components/uploadparts/UploadParts';
 import RecycleRepurpose from './components/mydata/RecycleRepurpose';
 import RecycleParts from './components/recyclefacility/RecycleParts';
 import CompleteRecycle from './components/recyclefacility/CompleRecycle';
+import RemanufactureParts from './components/manufacturer/RemanufactureParts';
+import CompleteRemanufacturing from './components/manufacturer/CompleteRemanufacturing';
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
           <Route  path='/recycle-repurpose-page' element={<RecycleRepurpose></RecycleRepurpose>}></Route>
           <Route  path='/recycle-parts' element={<RecycleParts></RecycleParts>}></Route>
           <Route  path='/complete-recycle' element={<CompleteRecycle></CompleteRecycle>}></Route>
+          <Route  path='/remanufacture-parts' element={<RemanufactureParts></RemanufactureParts>}></Route>
+          <Route  path='/complete-remanufacturing' element={<CompleteRemanufacturing></CompleteRemanufacturing>}></Route>
           
         </Routes>
       
