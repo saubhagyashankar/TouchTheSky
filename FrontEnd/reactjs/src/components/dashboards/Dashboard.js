@@ -8,6 +8,8 @@ import ChartCategory from './ChartCategory';
 import ChartMaterial from './ChartMaterial';
 import ChartPieMaterial from './ChartPieMaterial';
 
+// import logo from '../assets/load.gif'
+
 
 const Dashboard = () => {
     const [data, setData] = useState(null)

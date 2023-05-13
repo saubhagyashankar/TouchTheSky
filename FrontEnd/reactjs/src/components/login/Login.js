@@ -41,7 +41,7 @@ const Login = () => {
     return (
         <div>
             <Header className='App-header'>
-                Login
+                Login to Sustainable Future!
             </Header>
 
             <section className='login-section'>
@@ -61,7 +61,7 @@ const Login = () => {
                     <button className='login-button' onClick={e => handleLogin(e)}>Login</button>
                     <button className='login-button' onClick={_ => navigate('/forgot-password')}>Forgot Password</button>
                     <br/>
-                    <button className='login-button' onClick={_ => navigate('/create-user')}>Create User</button>
+                    {/* <button className='login-button' onClick={_ => navigate('/create-user')}>Create User</button> */}
 
                 
                 </form>

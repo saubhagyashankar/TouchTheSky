@@ -7,6 +7,7 @@ import SimplePythonScript from '../pythonscripts/SimplePythonScript'
 import ManufacturerHomePage from '../manufacturer/ManufacturerHomePage';
 import AirlineHomePage from '../airline/AirlineHomePage';
 import RecycleFacilityHomePage from '../recyclefacility/RecycleFacilityHomePage';
+import CreateUser from '../login/CreateUser';
 
 const Home = () => {
     const [userName, setUserName] = useState('')
@@ -35,13 +36,17 @@ const Home = () => {
         return (
             <RecycleFacilityHomePage></RecycleFacilityHomePage>
         )
+    if(userRole == 'S')
+        return (
+            <CreateUser></CreateUser>
+        )
     else
         return (
         <div>
             <Header>
                 Home
             </Header>
-            Loading ....
+            <img style={{position: "absolute", marginLeft: "auto", marginRight: "auto"}} src={'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif'} alt="loading..." />
             {/* <Header>
                 Loading...
             </Header>

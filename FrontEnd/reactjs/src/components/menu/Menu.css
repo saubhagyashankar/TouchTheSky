@@ -1,8 +1,9 @@
 #flyoutMenu {
-    width: 100vw;
+    width: 20vw;
     height: 100vh;
     /* background-color: #5c4cf1; */
-    background-color: black;
+    /* background-color: rgb(18, 94, 182); */
+    background-color: rgb(77, 11, 153);
     /* background-color: #8A2BE2; */
     position: fixed;
     top: 0;
@@ -24,10 +25,10 @@
    
   #flyoutMenu h2  {
     /* color: #333; */
-    color: white;
-    margin-left: 15px;
+    color: rgb(235, 102, 102);
+    margin-right: 50px;
     text-decoration: none;
-    margin-top: 50px;
+    margin-top: 35px;
     justify-content: center;
   }
    

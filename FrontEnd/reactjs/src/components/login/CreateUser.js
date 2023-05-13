@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import bcrypt from 'bcryptjs'
 import { BACKEND_URL } from '../static/Constants'
 import {Link, useNavigate} from 'react-router-dom'
+import Header from '../Header'
 
 const CreateUser = () => {
     const navigate = useNavigate();
@@ -43,29 +44,43 @@ const CreateUser = () => {
 
     return (
         <div>
-            <header className='App-header'>
-                <Link to='/home' className='back-btn'>Back⬅</Link>
+            <Header className='App-header'>
                 Create User
-            </header>
+            </Header>
 
-            <section>
-                <label>userName</label>
+            <section className='login-section'>
+
+            <form className='login-form'>
+                    <div className='input-field'>
+                {/* <label>userName</label> */}
                 <input type='text' onChange={e => handleOnChange(e)}
-                 name='userName'></input>
+                 name='userName' placeholder='UserName'></input>
                 <br></br>
-                <label>password</label>
+                </div>
+                <div className='input-field'>
+
+                {/* <label>password</label> */}
                 <input type='password' onChange={e => handleOnChange(e)}
-                 name='password'></input>
+                 name='password' placeholder='Password'></input>
                 <br></br>
-                <label>Email</label>
+                 </div>
+                 <div className='input-field'>
+                {/* <label>Email</label> */}
                 <input type='text' onChange={e => handleOnChange(e)}
-                 name='email'></input>
+                 name='email' placeholder='Email'></input>
                 <br></br>
-                <label>Role</label>
+                </div>
+                <div className='input-field'>
+                {/* <label>Role</label> */}
                 <input type='text' onChange={e => handleOnChange(e)}
-                  name='role' maxLength={1}></input>
+                  name='role' placeholder='Role' maxLength={1}></input>
                 <br></br>
-                <button onClick={handleCreateUser}>Submit</button>
+                </div>
+                <br></br>
+                <button className='login-button' onClick={handleCreateUser}>Submit</button>
+        
+       
+        </form>
             </section>
         </div>
     )

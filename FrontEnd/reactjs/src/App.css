@@ -1,5 +1,7 @@
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
+  background-color: rgb(74, 62, 145);
+  /* background-color: rgb(248, 140, 8); */
   min-height: 4vh;
   width: 100% ;
   display: flex;
@@ -21,8 +23,21 @@
 }
 
 .end-session {
-  background-color: #dfee0b;
-  color: rgb(7,7,7);
+  /* background-color: #dfee0b; */
+
+  /* color: rgb(7,7,7); */
+  /* color: blueviolet; */
+  color: rgb(245, 162, 68);
+  position: absolute;
+  right: 0;
+}
+
+.end-session :hover {
+  /* background-color: #dfee0b; */
+
+  /* color: rgb(7,7,7); */
+  /* color: blueviolet; */
+  color: rgb(245, 162, 68);
   position: absolute;
   right: 0;
 }

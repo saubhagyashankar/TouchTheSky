@@ -40,7 +40,7 @@ const Header = ({children}) => {
         <header className="App-header">
             {children}
             {page && page != 'login' &&
-                <Link to='/logout' className='end-session'>Logout</Link>
+                <Link to='/logout' className='end-session'>Logout⚡</Link>
             }
         </header>
     )
