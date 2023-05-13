@@ -13,12 +13,12 @@ To Run -
 
 go to Frontend/reactjs -
 run cmds
-    npm i 
+    npm i \n\r
     npm start
 
 go to Backend/nodejs -
 run cmds
-    npm i
+    npm i \n\r
     npm start
 
 For running the openai api's
