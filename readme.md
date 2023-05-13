@@ -1,3 +1,14 @@
+Tech Stack - MERN (Mongodb, Express, React, Node)
+
+Api - 
+OpenAi
+MongoDBAtlas
+
+You need to create a .env file with OPENAI_API_KEY and ATLAS_URI
+
+
+
+
 To Run -
 
 go to Frontend/reactjs -
