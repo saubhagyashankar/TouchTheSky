@@ -29,7 +29,7 @@ const Dashboard = () => {
         <div>
             <Header>
                 <MenuContainer></MenuContainer>
-                Dashboard
+                Dashboard - {UserDetails && UserDetails.user.userName}
             </Header>
             {/* All the graphs go here */}
             <small><b><i>
